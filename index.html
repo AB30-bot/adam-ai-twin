@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ADAM.AI — live Q&amp;A</title>
+<meta name="description" content="Digital identity: the AI twin of Adam Barbir answers the chat, then a tour of his digital footprint in 2035.">
+<meta property="og:title" content="ADAM.AI — live Q&A with Adam's AI twin">
+<meta property="og:description" content="Ask my human anything. Then jump to 2035 and see what the internet will know about him.">
+<meta property="og:image" content="https://ab30-bot.github.io/adam-ai-twin/img/st2_poster.jpg">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230E0E10'/%3E%3Ctext x='32' y='44' font-family='Arial Black,Arial' font-weight='900' font-size='34' text-anchor='middle' fill='%2335E0E8'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400&display=swap">
+<link rel="preload" as="video" href="clips/intro.mp4" type="video/mp4">
+<style>
+:root{
+  --st-bg:#000000; --st-panel:#1D1D1F; --st-panel-2:#2C2C2E; --st-line:#424245; --st-ink:#F5F5F7; --st-ink-2:#A1A1A6; --st-muted:#86868B;
+  --neon:#35E0E8; --live:#FF453A; --blue:#0071E3;
+  --dk-bg:#F5F5F7; --win:#FFFFFF; --chrome:#E8E8ED; --chrome-2:#F5F5F7; --ink:#1D1D1F; --ink-2:#6E6E73; --line:#D2D2D7; --desk-ink:#1D1D1F;
+  --li:#0A66C2; --wa:#00A884; --wa-bg:#0B141A; --wa-in:#202C33; --wa-out:#005C4B; --ig:#E1306C; --maps:#1A73E8;
+  --shadow-win:0 1px 2px rgba(0,0,0,.18),0 18px 40px -12px rgba(20,30,40,.35);
+  --shadow-win-up:0 2px 4px rgba(0,0,0,.2),0 30px 60px -14px rgba(20,30,40,.5);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--dk-bg:#161617;--chrome:#3A3A3C;--chrome-2:#2C2C2E;--desk-ink:#F5F5F7}}
+:root[data-theme="dark"]{--dk-bg:#161617;--chrome:#3A3A3C;--chrome-2:#2C2C2E;--desk-ink:#F5F5F7}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--st-bg);color:var(--st-ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;font-size:17px;line-height:1.47;letter-spacing:-.01em;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p{margin:0}
+button,input{font:inherit}
+:focus-visible{outline:2px solid var(--neon);outline-offset:2px}
+img,video{max-width:100%}
+
+/* ───────── studio ───────── */
+.studio{padding:0 16px 44px;position:relative}
+.topbar{max-width:1440px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:14px 0 12px;position:relative;z-index:2}
+.wordmark{font-weight:600;font-size:17px;letter-spacing:-.02em}
+.wordmark b{color:var(--neon);font-weight:600}
+.topbar .sp{flex:1}
+.viewers{display:flex;align-items:center;gap:8px;color:var(--st-ink-2);font-size:14px;font-variant-numeric:tabular-nums}
+.viewers i{width:8px;height:8px;border-radius:50%;background:var(--st-muted);transition:background .4s}
+.is-live .viewers i{background:var(--live);animation:blink 1.8s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.lead{max-width:760px;margin:36px auto 34px;text-align:center}
+.lead h1{font-size:clamp(34px,5.4vw,64px);font-weight:600;letter-spacing:-.028em;line-height:1.06}
+.lead p{font-size:clamp(18px,2vw,23px);color:var(--st-ink-2);margin-top:12px;letter-spacing:-.01em;line-height:1.35}
+.cta{position:absolute;left:50%;bottom:11%;transform:translateX(-50%);display:inline-flex;align-items:center;gap:10px;background:var(--blue);color:#fff;border:0;border-radius:980px;padding:13px 24px 13px 20px;font-size:17px;font-weight:500;cursor:pointer;box-shadow:0 10px 30px -8px rgba(0,113,227,.7);transition:transform .2s,opacity .4s}
+.cta:hover{transform:translate(-50%,-2px)}
+.cta i{width:0;height:0;border-left:11px solid #fff;border-top:7px solid transparent;border-bottom:7px solid transparent;display:inline-block}
+.player.started .cta{opacity:0;pointer-events:none}
+.set{max-width:1440px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:stretch;position:relative;z-index:1}
+@media (max-width:960px){.set{grid-template-columns:1fr}}
+.stage{position:relative}
+.glow{position:absolute;inset:-6% -5% auto -5%;height:112%;z-index:0;filter:blur(48px) saturate(1.4);opacity:0;transition:opacity 1.2s;pointer-events:none;border-radius:40px}
+.is-live .glow{opacity:.55}
+.player{position:relative;z-index:1;background:#000;border-radius:6px;overflow:hidden;aspect-ratio:16/9;box-shadow:0 20px 60px -20px rgba(0,0,0,.8)}
+.player video{display:block;width:100%;height:100%;object-fit:cover;background:#000;transition:filter .8s}
+.player:not(.started) video{filter:brightness(.55) saturate(.7)}
+.player .live{position:absolute;left:14px;top:14px;background:var(--st-panel-2);color:var(--st-ink-2);font-weight:700;font-size:13px;letter-spacing:.02em;padding:3px 8px;border-radius:4px;transition:background .3s,color .3s,transform .3s}
+.is-live .player .live{background:var(--live);color:#fff;transform:scale(1.06)}
+.player .note{position:absolute;right:14px;top:14px;background:rgba(0,0,0,.55);color:#ddd;font-size:12px;padding:4px 9px;border-radius:4px;backdrop-filter:blur(4px)}
+.player .hint{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.65),rgba(0,0,0,0) 50%);pointer-events:none;transition:opacity .5s}
+.player.started .hint{opacity:0}
+.player .cap{position:absolute;left:50%;bottom:9%;transform:translateX(-50%);max-width:88%;background:rgba(0,0,0,.72);color:#fff;font-weight:600;font-size:clamp(14px,1.7vw,22px);line-height:1.3;padding:8px 14px;border-radius:6px;text-align:center;text-wrap:balance}
+.player .cap em{font-style:normal;color:var(--neon)}
+.player .bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.15)}
+.player .bar i{display:block;height:100%;width:0;background:var(--neon);transition:width .25s linear}
+.player .now{position:absolute;left:14px;bottom:14px;background:rgba(0,0,0,.6);color:#fff;font-size:12.5px;padding:4px 9px;border-radius:4px;backdrop-filter:blur(4px);opacity:0;transition:opacity .3s}
+.player .now.on{opacity:1}
+.player .now b{color:var(--neon);font-weight:600}
+.info{display:flex;gap:14px;align-items:flex-start;padding:14px 2px 0;position:relative;z-index:1}
+.info img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid var(--neon);flex:none}
+.info h2{font-size:19px;font-weight:600;line-height:1.25;letter-spacing:-.02em}
+.info .who{color:var(--st-ink-2);font-size:14px;margin-top:2px}
+.info .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.info .tags span{background:var(--st-panel-2);color:var(--st-ink-2);font-size:12.5px;font-weight:500;padding:3px 10px;border-radius:980px}
+.info .sound{margin-left:auto;display:flex;align-items:center;gap:8px;color:var(--st-ink-2);font-size:14px;white-space:nowrap}
+.info .sound input{accent-color:var(--neon);width:18px;height:18px}
+@media (max-width:600px){.info{flex-wrap:wrap}.info .sound{margin-left:0;width:100%}}
+.chat{background:var(--st-panel);border-radius:6px;display:flex;flex-direction:column;overflow:hidden;min-height:0;height:100%;position:relative;z-index:1}
+@media (max-width:960px){.chat{height:500px}}
+.chat-head{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-bottom:1px solid var(--st-line);font-weight:600;font-size:13px;color:var(--st-ink-2)}
+.start{border:0;background:var(--blue);color:#fff;font-weight:500;font-size:13px;padding:6px 13px;border-radius:980px;cursor:pointer;transition:filter .2s,transform .2s}
+.start:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.start.done{background:var(--st-panel-2);color:var(--st-muted);cursor:default;transform:none}
+.feed{flex:1;overflow-y:auto;padding:8px 6px;display:flex;flex-direction:column;gap:1px;scrollbar-width:thin;scrollbar-color:#3A3A40 transparent;overscroll-behavior:contain}
+.m{display:block;width:100%;text-align:left;background:none;border:0;border-radius:4px;color:var(--st-ink);padding:5px 8px;font-size:14px;line-height:1.4;cursor:default;animation:arrive .35s ease-out both}
+@keyframes arrive{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.m .u{font-weight:700}
+.m .u::after{content:": ";color:var(--st-ink-2);font-weight:400}
+.m .badge{display:inline-block;width:14px;height:14px;border-radius:3px;background:var(--neon);vertical-align:-2px;margin-right:5px;position:relative}
+.m .badge::after{content:"";position:absolute;inset:4px;background:#000;border-radius:1px}
+.m.q{cursor:pointer;transition:background .15s}
+.m.q:hover{background:var(--st-panel-2)}
+.m.q::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--neon);margin:0 8px 2px 0;vertical-align:middle;box-shadow:0 0 0 0 rgba(53,224,232,.6)}
+.m.q.next::before{animation:ping 1.4s ease-out 2}
+@keyframes ping{to{box-shadow:0 0 0 8px rgba(53,224,232,0)}}
+.m.q.active{background:rgba(53,224,232,.14);box-shadow:inset 3px 0 0 var(--neon)}
+.m.q.done{color:var(--st-muted)}
+.m.q.done::before{background:var(--st-line)}
+.m.r{color:var(--st-ink-2)}
+.m.sys{color:var(--st-muted);font-size:12.5px;font-style:italic}
+.chat-foot{display:flex;gap:8px;padding:8px;border-top:1px solid var(--st-line)}
+.chat-foot input{flex:1;min-width:0;background:var(--st-panel-2);border:1px solid transparent;border-radius:4px;color:var(--st-ink);padding:8px 10px;font-size:14px}
+.chat-foot input:focus{border-color:var(--blue);outline:0}
+.chat-foot button{background:var(--st-panel-2);border:0;color:var(--st-ink-2);border-radius:980px;padding:0 14px;font-weight:500;cursor:pointer}
+.chat-foot button:hover{color:var(--st-ink)}
+
+/* ───────── time jump ───────── */
+.jump{background:var(--dk-bg);padding:96px 16px 0;color:var(--desk-ink)}
+.jump-in{max-width:820px;margin:0 auto;display:flex;justify-content:center;align-items:baseline;gap:.25em;flex-wrap:wrap;text-align:center}
+.jump h2{font-size:clamp(36px,6vw,72px);font-weight:600;letter-spacing:-.03em;line-height:1.05;display:flex;justify-content:center;align-items:baseline;gap:.22em;flex-wrap:wrap}
+.roll{display:inline-block;height:1em;overflow:hidden;vertical-align:baseline;line-height:1;position:relative;color:var(--blue)}
+.roll span{display:block;height:1em;line-height:1;font-variant-numeric:tabular-nums}
+@supports (animation-timeline: view()){
+  .roll .col{animation:roll linear both;animation-timeline:view();animation-range:entry 0% cover 45%}
+  @keyframes roll{from{transform:translateY(0)}to{transform:translateY(-9em)}}
+}
+@supports not (animation-timeline: view()){.roll .col{transform:translateY(-9em)}}
+.jump p{max-width:58ch;color:var(--ink-2);font-size:clamp(18px,2vw,21px);margin:16px auto 0;line-height:1.4}
+:root[data-theme="dark"] .jump p{color:#A1A1A6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .jump p{color:#A1A1A6}}
+
+/* ───────── desktop 2035 ───────── */
+.desk{background:var(--dk-bg);color:var(--ink);padding:56px 16px 120px;position:relative}
+.desk-in{max-width:1200px;margin:0 auto}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:start}
+.c7{grid-column:span 7}.c5{grid-column:span 5}.c12{grid-column:1/-1}
+@media (max-width:900px){.c7,.c5{grid-column:1/-1}}
+.win{background:var(--win);border-radius:12px;box-shadow:var(--shadow-win);overflow:hidden;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);position:relative;transition:box-shadow .25s}
+.win.lift{box-shadow:var(--shadow-win-up);z-index:5}
+.win-bar{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:8px 12px;background:var(--chrome);font-size:12.5px;cursor:grab;user-select:none;touch-action:none}
+.win-bar:active{cursor:grabbing}
+.dots{display:flex;gap:6px}.dots i{width:11px;height:11px;border-radius:50%}
+.dots i:nth-child(1){background:#FF5F57}.dots i:nth-child(2){background:#FEBC2E}.dots i:nth-child(3){background:#28C840}
+.url{background:var(--chrome-2);border-radius:999px;padding:5px 12px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12.5px}
+.url b{color:var(--ink);font-weight:500}
+:root[data-theme="dark"] .url,:root[data-theme="dark"] .url b,:root[data-theme="dark"] .win-bar time{color:#E8EAED}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .url,:root:not([data-theme="light"]) .url b,:root:not([data-theme="light"]) .win-bar time{color:#E8EAED}}
+.win-bar time{color:var(--ink-2)}
+.phone{width:min(100%,372px);margin:0 auto;background:#000;border-radius:38px;padding:10px;box-shadow:var(--shadow-win);position:relative;transition:box-shadow .25s}
+.phone.lift{box-shadow:var(--shadow-win-up);z-index:5}
+.screen{border-radius:30px;overflow:hidden;background:#fff;position:relative;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.status{display:flex;justify-content:space-between;align-items:center;padding:10px 22px 4px;font-size:13px;font-weight:600;cursor:grab;user-select:none;touch-action:none}
+.status .isl{position:absolute;left:50%;top:9px;transform:translateX(-50%);width:96px;height:26px;border-radius:999px;background:#000}
+/* LinkedIn */
+.li-cover{height:120px;background:url("img/banner_s.jpg") center/cover}
+.li-top{padding:0 20px 14px;position:relative;display:flow-root}
+.li-top img{width:104px;height:104px;border-radius:50%;border:4px solid #fff;object-fit:cover;margin-top:-52px;display:block}
+.li-top .btns{position:absolute;right:20px;top:14px;display:flex;gap:8px}
+.li-top .btns span{border-radius:999px;padding:6px 14px;font-weight:600;font-size:14px;border:1px solid var(--li);color:var(--li)}
+.li-top .btns span:first-child{background:var(--li);color:#fff}
+.li-name{font-size:22px;font-weight:600;margin-top:10px;line-height:1.2}
+.li-name small{font-size:13px;font-weight:400;color:var(--ink-2);margin-left:6px}
+.li-head{font-size:15px;margin-top:2px}
+.li-loc{font-size:13.5px;color:var(--ink-2);margin-top:4px}
+.li-loc b{color:var(--li);font-weight:600}
+.li-sec{border-top:1px solid var(--line);padding:14px 20px}
+.li-sec h3{font-size:18px;font-weight:600;margin-bottom:10px}
+.li-sec p{font-size:14px;line-height:1.5}
+.xp{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.xp li{display:grid;grid-template-columns:48px 1fr;gap:12px}
+.xp .logo{width:48px;height:48px;border-radius:4px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:13px}
+.xp strong{display:block;font-weight:600;font-size:15px}
+.xp span{display:block;font-size:14px}
+.xp small{display:block;color:var(--ink-2);font-size:13px}
+.xp p{font-size:13.5px;color:#333;margin-top:4px}
+/* Google Maps timeline */
+.map{position:relative;aspect-ratio:1991/573;background:#cfe0ea;overflow:hidden}
+.map img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block}
+.pin{position:absolute;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11.5px;font-weight:600;color:#202124}
+.pin i{width:14px;height:14px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:#EA4335;border:2px solid #fff;box-shadow:0 1px 3px rgba(0,0,0,.4);display:block}
+.pin.home i{background:var(--maps)}
+.pin span{background:rgba(255,255,255,.94);padding:1px 6px;border-radius:4px;box-shadow:0 1px 2px rgba(0,0,0,.2);white-space:nowrap}
+.tl{padding:14px 18px 18px}
+.tl h3{font-size:16px;font-weight:600;margin-bottom:2px}
+.tl .sum{color:var(--ink-2);font-size:13.5px;margin-bottom:12px}
+.tl ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px 18px}
+@media (max-width:520px){.tl ul{grid-template-columns:1fr}}
+.tl li{display:grid;grid-template-columns:22px 1fr;gap:10px;font-size:14px;line-height:1.3}
+.tl li i{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#E8F0FE;color:var(--maps);font-size:12px;font-style:normal}
+.tl li b{display:block;font-weight:600}
+.tl li small{color:var(--ink-2);font-size:12.5px}
+/* newspaper */
+.news{font-family:"Newsreader",Georgia,serif}
+.mast{display:flex;justify-content:space-between;align-items:baseline;padding:16px 26px 10px;border-bottom:3px double #1F1F1F}
+.mast b{font-size:26px;font-weight:700;letter-spacing:-.01em}
+.mast span{font-family:system-ui,sans-serif;font-size:12.5px;color:var(--ink-2)}
+.story{padding:18px 26px 26px;display:grid;grid-template-columns:1.25fr 1fr;gap:26px;align-items:start}
+@media (max-width:820px){.story{grid-template-columns:1fr}}
+.kick{font-family:system-ui,sans-serif;font-size:12.5px;font-weight:600;color:#B3261E;margin-bottom:6px}
+.story h3{font-size:clamp(24px,3vw,34px);line-height:1.08;font-weight:700;letter-spacing:-.01em;margin-bottom:8px}
+.story .by{font-family:system-ui,sans-serif;font-size:13px;color:var(--ink-2);margin-bottom:14px}
+.story p{font-size:17px;line-height:1.55;max-width:60ch;margin-bottom:12px}
+.story p:first-of-type::first-letter{font-size:3em;float:left;line-height:.85;padding:4px 8px 0 0;font-weight:700}
+.story figure{margin:0}
+.story figure img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover}
+.story figcaption{font-family:system-ui,sans-serif;font-size:12.5px;color:var(--ink-2);margin-top:6px;line-height:1.4}
+/* WhatsApp */
+.wa .screen{background:var(--wa-bg);color:#E9EDEF}
+.wa .status{color:#fff}
+.wa-head{display:flex;align-items:center;gap:10px;padding:8px 14px 10px;background:#202C33;font-size:15px}
+.wa-head img{width:36px;height:36px;border-radius:50%;object-fit:cover}
+.wa-head b{display:block;font-weight:600}
+.wa-head small{display:block;color:#8696A0;font-size:12px}
+.wa-body{padding:12px 10px 14px;display:flex;flex-direction:column;gap:6px;background:var(--wa-bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Ccircle cx='20' cy='20' r='1' fill='%23ffffff' fill-opacity='.05'/%3E%3C/svg%3E")}
+.wa-date{align-self:center;background:#182229;color:#8696A0;font-size:12px;padding:4px 10px;border-radius:8px}
+.bub{max-width:88%;padding:7px 10px 18px;border-radius:9px;font-size:14.5px;line-height:1.4;position:relative;white-space:pre-wrap;background:var(--wa-in);border-top-left-radius:2px}
+.bub.out{align-self:flex-end;background:var(--wa-out);border-top-left-radius:9px;border-top-right-radius:2px}
+.bub .who{display:block;color:#53BDEB;font-weight:600;font-size:13px;margin-bottom:2px}
+.bub .t{position:absolute;right:8px;bottom:3px;font-size:11px;color:#8696A0}
+.bub.out .t::after{content:" ✓✓";color:#53BDEB}
+.wa-foot{display:flex;align-items:center;gap:8px;padding:8px 10px 12px;background:#202C33}
+.wa-foot span{flex:1;background:#2A3942;border-radius:999px;padding:8px 14px;color:#8696A0;font-size:14px}
+.wa-foot i{width:40px;height:40px;border-radius:50%;background:var(--wa);display:grid;place-items:center;color:#fff;font-style:normal;font-size:16px}
+/* Instagram */
+.ig .screen{background:#fff;color:#000}
+.ig-head{display:flex;align-items:center;gap:10px;padding:8px 14px}
+.ig-head img{width:34px;height:34px;border-radius:50%;object-fit:cover;border:2px solid var(--ig)}
+.ig-head b{font-weight:600;font-size:14px}
+.ig-head small{display:block;color:#737373;font-size:12px}
+.ig-head .dots-v{margin-left:auto;color:#000;font-weight:700;letter-spacing:1px}
+.ig-img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}
+.ig-acts{display:flex;gap:16px;padding:10px 14px 4px;font-size:22px;line-height:1}
+.ig-acts span:last-child{margin-left:auto}
+.ig-acts .heart{cursor:pointer;transition:transform .2s}
+.ig-acts .heart.on{color:#ED4956;transform:scale(1.15)}
+.ig-cap{padding:4px 14px 18px;font-size:14px;line-height:1.4}
+.ig-cap .likes{display:block;font-weight:600;margin-bottom:4px}
+.ig-cap b{font-weight:600}
+.ig-cap .c{display:block;color:#737373;margin-top:6px;font-size:13.5px}
+.ig-cap .ago{display:block;color:#737373;font-size:11px;margin-top:6px}
+/* dock */
+.dock{position:fixed;left:50%;bottom:16px;transform:translate(-50%,120%);display:flex;gap:6px;padding:8px;background:rgba(255,255,255,.72);backdrop-filter:blur(14px) saturate(1.5);border-radius:18px;box-shadow:0 10px 30px -8px rgba(0,0,0,.35);z-index:20;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+.dock.on{transform:translate(-50%,0)}
+.dock button{width:46px;height:46px;border:0;border-radius:12px;color:#fff;font-weight:700;font-size:12px;cursor:pointer;display:grid;place-items:center;transition:transform .2s}
+.dock button:hover{transform:translateY(-6px) scale(1.08)}
+.dock button span{position:absolute;bottom:-4px;width:4px;height:4px;border-radius:50%;background:#444;opacity:0}
+/* footer */
+.foot{background:var(--dk-bg);color:#86868B;font-size:12px;padding:0 16px 34px}
+.foot div{max-width:1200px;margin:0 auto;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;line-height:1.5}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .is-live .viewers i,.m,.m.q.next::before,.roll .col{animation:none!important}
+  .roll .col{transform:translateY(-9em)}
+  .glow{display:none}
+  .dock,.dock button,.start,.win,.phone{transition:none}
+}
+</style>
+</head>
+<body>
+
+<section class="studio" id="studio">
+  <div class="topbar">
+    <div class="wordmark">ADAM<b>.AI</b></div>
+    <div class="sp"></div>
+    <div class="viewers"><i></i> <span id="vc">offline</span></div>
+  </div>
+  <div class="lead">
+    <h1>Ask my human anything.</h1>
+    <p>A live Q&amp;A with ADAM.AI, the digital twin of Adam Barbir, 16. Pick a question in the chat — he answers on camera.</p>
+  </div>
+  <div class="set">
+    <div class="stage">
+      <canvas class="glow" id="glow" width="32" height="18" aria-hidden="true"></canvas>
+      <div class="player" id="player">
+        <video id="tv" poster="img/st2_poster.jpg" playsinline preload="metadata" aria-label="ADAM.AI, a generated avatar in a studio, answers the chat"></video>
+        <div class="live" id="livebadge">OFFLINE</div>
+        <div class="note">generated avatar · synthetic voice · no cloning</div>
+        <div class="hint"></div>
+        <button class="cta" id="cta" type="button"><i></i>Start the stream</button>
+        <div class="cap" id="cap" hidden></div>
+        <div class="now" id="now"></div>
+        <div class="bar"><i id="bar"></i></div>
+      </div>
+      <div class="info">
+        <img src="img/st2_face.jpg" alt="">
+        <div>
+          <h2>Ask my human anything — Q&amp;A with Adam’s AI twin</h2>
+          <div class="who">ADAM.AI · the digital twin of Adam Barbir, 16</div>
+          <div class="tags"><span>English</span><span>Digital identity</span><span>Première</span><span>Just chatting</span></div>
+        </div>
+        <label class="sound"><input type="checkbox" id="voice" checked> Sound on</label>
+      </div>
+    </div>
+    <aside class="chat" aria-label="stream chat">
+      <div class="chat-head"><span>STREAM CHAT</span><button class="start" id="golive" type="button">Start the stream</button></div>
+      <div class="feed" id="feed" aria-live="polite"></div>
+      <form class="chat-foot" id="say"><input id="sayin" placeholder="Send a message" maxlength="120" autocomplete="off"><button type="submit">Chat</button></form>
+    </aside>
+  </div>
+</section>
+
+<section class="jump" id="jump">
+  <div class="jump-in">
+    <h2><span>Adam Barbir,</span> <span class="roll" aria-label="2035"><span class="col"><span>2026</span><span>2027</span><span>2028</span><span>2029</span><span>2030</span><span>2031</span><span>2032</span><span>2033</span><span>2034</span><span>2035</span></span></span></h2>
+  </div>
+  <div class="jump-in"><p>What the internet will know about him ten years from now, if things go the way he plans. Every window below is fiction, every photo is AI-generated — and you can drag them around.</p></div>
+</section>
+
+<section class="desk" id="desk">
+  <div class="desk-in">
+    <div class="grid" id="grid">
+
+      <article class="win c7" id="w-li">
+        <div class="win-bar" data-drag><div class="dots"><i></i><i></i><i></i></div><div class="url"><b>linkedin.com</b>/in/adambarbir</div><time>2035</time></div>
+        <div class="li-cover"></div>
+        <div class="li-top">
+          <img src="img/st2_face.jpg" alt="">
+          <div class="btns"><span>Message</span><span>Follow</span></div>
+          <div class="li-name">Adam Barbir <small>· 1st</small></div>
+          <div class="li-head">Founder &amp; CEO at Loop Labs — a tech company with AI at its core</div>
+          <div class="li-loc">San Francisco Bay Area · <b>3,412 followers</b> · 500+ connections</div>
+        </div>
+        <div class="li-sec">
+          <h3>About</h3>
+          <p>I build AI agents that do the boring work so people can do the interesting part. Grew up with power cuts, so everything we ship assumes the lights will go off.</p>
+        </div>
+        <div class="li-sec">
+          <h3>Experience</h3>
+          <ul class="xp">
+            <li><div class="logo" style="background:#0B7C8A">LL</div><div><strong>Founder &amp; CEO</strong><span>Loop Labs · Full-time</span><small>Jan 2032 – present · San Francisco &amp; Paris</small><p>AI agents that run the back office of small businesses in 14 countries. 38 people.</p></div></li>
+            <li><div class="logo" style="background:#3B4C57">M</div><div><strong>AI engineer</strong><span>Mistral AI · Part-time</span><small>2032 · Paris, remote</small><p>Tool-calling stack for voice agents, during the MIT year.</p></div></li>
+          </ul>
+        </div>
+        <div class="li-sec">
+          <h3>Education</h3>
+          <ul class="xp">
+            <li><div class="logo" style="background:#8B1D2C">MIT</div><div><strong>Massachusetts Institute of Technology</strong><span>Master of Science, Artificial Intelligence</span><small>2031 – 2032 · Cambridge, MA</small></div></li>
+            <li><div class="logo" style="background:#C9A227">X</div><div><strong>École Polytechnique</strong><span>Cycle ingénieur, majeure informatique</span><small>2028 – 2031 · Palaiseau</small></div></li>
+            <li><div class="logo" style="background:#8A2C2C">LV</div><div><strong>Lycée Verdun, Beirut</strong><span>Baccalauréat — spé Maths, Physique-Chimie, NSI</span><small>2025 – 2028</small></div></li>
+          </ul>
+        </div>
+      </article>
+
+      <div class="c5" id="w-wa">
+        <div class="phone wa"><div class="screen">
+          <div class="isl"></div>
+          <div class="status" data-drag><span>21:07</span><span>▲▲ 5G ▮</span></div>
+          <div class="wa-head"><img src="img/st2_face.jpg" alt=""><div><b>Adam (2035)</b><small>online</small></div></div>
+          <div class="wa-body">
+            <div class="wa-date">18 September 2035</div>
+            <div class="bub"><span class="who">Adam · 2035</span>Hey. It's you, ten years later. Yes, the electricity still cuts sometimes. No, it doesn't stop us anymore.
+
+Three things:
+1. The projects you build "for fun" right now are the ones that open every door later. Keep going.
+2. Take care of the people around you. In 2035 they are still the same people, and they still matter more than any company.
+3. Sleep before 1 a.m. (You won't. I know.)
+
+Say yes to the trips your friends propose, all of them. And be patient with people — they think slower than your ideas, and that's fine.<span class="t">21:07</span></div>
+            <div class="bub out">wait, how do I reply to the future<span class="t">21:09</span></div>
+          </div>
+          <div class="wa-foot"><span>Message</span><i>🎤</i></div>
+        </div></div>
+      </div>
+
+      <article class="win c12 news" id="w-news">
+        <div class="win-bar" data-drag><div class="dots"><i></i><i></i><i></i></div><div class="url"><b>levanttechreview.com</b>/2035/03/loop-labs-blackout</div><time>12 March 2035</time></div>
+        <div class="mast"><b>The Levant Tech Review</b><span>Startups · Middle East · Tuesday 12 March 2035</span></div>
+        <div class="story">
+          <div>
+            <div class="kick">Startups</div>
+            <h3>His AI agents kept 40,000 small businesses running through the 2034 blackout</h3>
+            <div class="by">By Lina Haddad, in San Francisco</div>
+            <p>When the regional grid failed for eleven days last October, most companies stopped answering their phones. The clients of Loop Labs did not. Their invoices went out, their orders were confirmed and their customers were called back — by software that had been designed, from day one, to work without a stable connection.</p>
+            <p>"I grew up with power cuts. I built a company that assumes the lights will go off," says Adam Barbir, 25, who founded Loop Labs in 2032, straight out of MIT and Polytechnique. This week he was named in the Forbes 30 Under 30 list, and Loop Labs opened its second office, in Paris.</p>
+            <p>The agents, he insists, are not magic: "They just do the boring parts, every day, without forgetting. That's all most businesses need."</p>
+          </div>
+          <figure>
+            <img src="img/news_s.jpg" alt="A founder on a conference stage in front of a large screen">
+            <figcaption>Barbir on stage at the AI Agents Summit in Singapore. Photo: Loop Labs (AI-generated illustration)</figcaption>
+          </figure>
+        </div>
+      </article>
+
+      <article class="win c7" id="w-maps">
+        <div class="win-bar" data-drag><div class="dots"><i></i><i></i><i></i></div><div class="url"><b>google.com</b>/maps/timeline?year=2035</div><time>2035</time></div>
+        <div class="map">
+          <img src="img/world.jpg" alt="World map with Adam's places">
+          <div class="pin home" style="left:13.64%;top:47.58%"><i></i><span>San Francisco · home</span></div>
+          <div class="pin" style="left:28.31%;top:41.62%"><i></i><span>Boston · MIT</span></div>
+          <div class="pin" style="left:49.29%;top:32.38%"><i></i><span>Paris · office</span></div>
+          <div class="pin" style="left:58.76%;top:52.33%"><i></i><span>Beirut · family</span></div>
+          <div class="pin" style="left:88.53%;top:50.16%"><i></i><span>Tokyo</span></div>
+          <div class="pin" style="left:78.28%;top:86.79%"><i></i><span>Singapore</span></div>
+        </div>
+        <div class="tl">
+          <h3>Your timeline · 2035</h3>
+          <div class="sum">4 continents · 61 flights · 3 places called home</div>
+          <ul>
+            <li><i>⌂</i><div><b>San Francisco</b><small>Home since 2033</small></div></li>
+            <li><i>▣</i><div><b>Paris 13e</b><small>Loop Labs office, one week a month</small></div></li>
+            <li><i>♥</i><div><b>Beirut, Achrafieh</b><small>Every summer, family</small></div></li>
+            <li><i>◆</i><div><b>Cambridge, MA</b><small>MIT, 2031–2032</small></div></li>
+            <li><i>✈</i><div><b>Tokyo</b><small>First Asian clients, 2034</small></div></li>
+            <li><i>✈</i><div><b>Singapore</b><small>AI Agents Summit, keynote</small></div></li>
+          </ul>
+        </div>
+      </article>
+
+      <div class="c5" id="w-ig">
+        <div class="phone ig"><div class="screen">
+          <div class="isl"></div>
+          <div class="status" data-drag><span>02:14</span><span>▲▲ 5G ▮</span></div>
+          <div class="ig-head"><img src="img/st2_face.jpg" alt=""><div><b>adam.barbir</b><small>San Francisco, California</small></div><span class="dots-v">···</span></div>
+          <img class="ig-img" id="igimg" src="img/insta_s.jpg" alt="A desk at night with three screens of code and a city outside the window">
+          <div class="ig-acts"><span class="heart" id="heart" role="button" tabindex="0" aria-label="like">♡</span><span>◯</span><span>➤</span><span>⊓</span></div>
+          <div class="ig-cap">
+            <span class="likes"><span id="likes">2,035</span> likes</span>
+            <b>adam.barbir</b> Same desk habit as 2026, bigger screens. 2 a.m., the agents are shipping and I am just watching the logs. This is the whole point.
+            <span class="c">View all 148 comments</span>
+            <span class="c" style="margin-top:2px"><b>looplabs</b> go to sleep boss, we have got this</span>
+            <span class="ago">3 hours ago</span>
+          </div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+  <nav class="dock" id="dock" aria-label="windows">
+    <button style="background:#0A66C2" data-go="w-li" title="LinkedIn">in</button>
+    <button style="background:#00A884" data-go="w-wa" title="WhatsApp">WA</button>
+    <button style="background:#1F1F1F" data-go="w-news" title="The Levant Tech Review">LTR</button>
+    <button style="background:#1A73E8" data-go="w-maps" title="Google Maps">M</button>
+    <button style="background:linear-gradient(45deg,#F9CE34,#EE2A7B,#6228D7)" data-go="w-ig" title="Instagram">IG</button>
+  </nav>
+</section>
+
+<footer class="foot"><div>
+  <span>Made by Adam Barbir for English class · Lycée Verdun · September 2026</span>
+  <span>Avatar and photos: FLUX.1 · voice: Fish Speech · animation: SadTalker — all run locally, no face or voice cloning.</span>
+</div></footer>
+
+<script>
+const S = {"intro": {"user": null, "text": "Okay... we're live. Hey chat! I'm ADAM.AI, the digital twin of Adam Barbir. I was trained on his projects, his playlists and his one a.m. bug fixes. The chat is open, so send me your questions about my human and I'll answer them right now."}, "qa": [{"user": "lina_h", "color": "#F28C6A", "q": "Who is your human?", "a": "Oh, first message, from lina_h: who is your human? Okay, easy one. My human is Adam Barbir. He's sixteen, he lives in Beirut, and he's in Première at Lycée Verdun, with maths, physics-chemistry and computer science as his specialities. He spends his evenings building AI tools, automations and websites, and his weekends gaming with his friends. And me? I'm the version of him that never sleeps."}, {"user": "max.dev", "color": "#5AC8FA", "q": "What are their strengths and weaknesses?", "a": "Max.dev asks: what are his strengths and weaknesses? Ha, straight to the point. His strength is that he builds things. When he wants something to exist, he makes it: a website, a phone-calling robot, a short film. He learns by doing, and he doesn't give up on a bug at one in the morning. His weakness? He wants to go fast, sometimes too fast. He's impatient, and he always has five projects open at the same time. Trust me, I see the tabs."}, {"user": "nour_k", "color": "#B48CF2", "q": "What makes them angry?", "a": "Nour_k: what makes him angry? Oh, I have a list. Power cuts. Especially in the middle of a render that took three hours. Internet that blocks half of the websites he needs. And people who say that using AI is cheating. For him it's a tool, like a calculator: you still have to understand what you're doing."}, {"user": "samir99", "color": "#7ED957", "q": "What are they afraid of?", "a": "Samir99 wants to know what he's afraid of. Okay, honest answer. Wasting his potential. Being stuck somewhere nothing works, while people his age build the future somewhere else. And... a little bit of speaking in front of the class. Yeah, I said it."}, {"user": "yara_codes", "color": "#FFD166", "q": "What would they change about the world?", "a": "Yara_codes: what would he change about the world? Two things. First, reliable electricity and internet for everyone, because without them, talent doesn't matter. Second, a school that teaches you to build and to think, not only to memorise. And he'd like the world to judge people by what they do, not by where they come from."}, {"user": "elie.b", "color": "#4DD0E1", "q": "What is their dream?", "a": "Elie.b asks the big one: what is his dream? To work in tech and build his own company. He's sure of one thing: AI will be at the core of it, because that's where the world is going. CEO of an AI company, or of something else? He doesn't know yet, and he likes that the door is still open. What he wants is to build things people actually use. Not demos."}, {"user": "jad_m", "color": "#FF8FA3", "q": "What does the future look like?", "a": "Last one, from jad_m: what does the future look like? Okay, let me load 2035. He's twenty-five. Studies done, Polytechnique, then MIT, and a company of his own, with AI at its heart. Where exactly? France, America, Lebanon, maybe Asia. He wants the whole map, not one city. The details are still open. What's certain is that he'll be building something. Scroll down, I already built one possible version of his digital footprint."}], "outro": {"user": null, "text": "And that's the end of the stream. Thanks, chat. If you want to see what the internet will know about him in 2035, his digital footprint is right below. See you."}};
+const WORDS = {"intro": {"text": "Hi. I'm ADAM.AI, the digital twin of Adam Barbir. I was trained on his projects, his playlists and his one a.m. bug fixes. Ask me anything about my human.", "words": [[0.0, 0.92], [0.92, 1.06], [1.06, 1.16], [1.16, 2.16], [2.16, 2.3], [2.3, 2.6], [2.6, 2.96], [2.96, 3.14], [3.14, 3.36], [3.36, 4.22], [4.42, 4.5], [4.5, 4.64], [4.64, 4.84], [4.84, 5.12], [5.12, 5.3], [5.3, 6.2], [6.2, 6.26], [6.26, 7.08], [7.08, 7.12], [7.12, 7.26], [7.26, 7.8], [7.8, 8.16], [8.16, 9.1], [9.52, 9.52], [9.52, 9.72], [9.72, 9.94], [9.94, 10.3], [10.3, 10.52], [10.52, 11.26]]}, "a1": {"text": "Oh, first message, from lina_h: who is your human? Okay, easy one. My human is Adam Barbir. He's sixteen, he lives in Beirut, and he's in Première at Lycée Verdun, with maths, physics-chemistry and computer science as his specialities. He spends his evenings building AI tools, automations and websites, and his weekends gaming with his friends. And me? I'm the version of him that never sleeps.", "words": [[0.0, 0.9], [0.9, 1.08], [1.08, 2.44], [2.48, 2.68], [2.68, 3.12], [3.12, 3.8], [3.8, 4.84], [5.08, 5.08], [5.08, 5.24], [5.24, 5.46], [5.46, 6.34], [6.54, 7.14], [7.14, 7.44], [7.44, 8.26], [8.48, 8.48], [8.48, 8.78], [8.78, 9.2], [9.2, 9.46], [9.46, 10.42], [10.42, 10.64], [10.64, 11.46], [11.46, 11.56], [11.56, 11.78], [11.78, 12.0], [12.0, 12.88], [12.88, 12.94], [12.94, 13.12], [13.12, 13.22], [13.22, 13.44], [13.44, 13.96], [13.96, 14.16], [14.16, 14.76], [15.3, 15.3], [15.3, 15.9], [15.9, 16.1], [16.1, 17.16], [17.16, 17.26], [17.26, 17.52], [17.52, 18.02], [18.02, 18.54], [18.54, 18.7], [18.7, 20.1], [20.12, 20.22], [20.22, 20.44], [20.44, 20.7], [20.7, 21.02], [21.02, 21.46], [21.46, 21.78], [21.78, 22.68], [22.68, 23.2], [23.2, 23.48], [23.48, 23.86], [23.86, 24.44], [24.44, 24.58], [24.58, 24.92], [24.92, 25.38], [25.38, 25.8], [25.8, 25.94], [25.94, 26.76], [27.16, 27.28], [27.28, 27.88], [27.88, 28.22], [28.22, 28.32], [28.32, 28.56], [28.56, 28.84], [28.84, 29.0], [29.0, 29.34], [29.34, 29.62], [29.62, 30.44]]}, "a2": {"text": "Max.dev asks: what are his strengths and weaknesses? Ha, straight to the point. His strength is that he builds things. When he wants something to exist, he makes it: a website, a phone-calling robot, a short film. He learns by doing, and he doesn't give up on a bug at one in the morning. His weakness? He wants to go fast, sometimes too fast. He's impatient, and he always has five projects open at the same time. Trust me, I see the tabs.", "words": [[0.0, 0.32], [0.32, 0.78], [0.78, 1.5], [1.5, 1.64], [1.64, 1.76], [1.76, 1.9], [1.9, 2.18], [2.18, 2.68], [2.68, 3.82], [4.1, 4.36], [4.36, 4.54], [4.54, 4.8], [4.8, 4.88], [4.88, 5.62], [5.62, 5.86], [5.86, 6.12], [6.12, 6.38], [6.38, 6.58], [6.58, 6.72], [6.72, 6.98], [6.98, 7.88], [8.06, 8.16], [8.16, 8.34], [8.34, 8.54], [8.54, 8.84], [8.84, 9.14], [9.14, 9.88], [9.88, 9.94], [9.94, 10.12], [10.12, 10.3], [10.3, 10.4], [10.4, 11.14], [11.14, 11.22], [11.22, 11.44], [11.44, 11.74], [11.74, 12.54], [12.54, 12.68], [12.68, 12.92], [12.92, 13.84], [13.88, 13.98], [13.98, 14.24], [14.24, 14.52], [14.52, 15.24], [15.24, 15.38], [15.38, 15.5], [15.5, 15.8], [15.8, 15.96], [15.96, 16.12], [16.12, 16.28], [16.28, 16.38], [16.38, 16.52], [16.52, 16.74], [16.74, 16.92], [16.92, 17.1], [17.1, 17.2], [17.2, 18.0], [18.14, 18.22], [18.22, 19.22], [19.22, 19.44], [19.44, 19.62], [19.62, 19.86], [19.86, 20.02], [20.02, 20.78], [20.78, 21.18], [21.18, 21.54], [21.54, 22.46], [22.56, 22.74], [22.74, 23.56], [23.56, 23.74], [23.74, 23.86], [23.86, 24.06], [24.06, 24.36], [24.36, 24.7], [24.7, 25.08], [25.08, 25.46], [25.46, 25.68], [25.68, 25.8], [25.8, 26.04], [26.04, 26.84], [26.88, 27.16], [27.16, 27.7], [27.7, 27.92], [27.92, 28.08], [28.08, 28.24], [28.24, 29.1]]}, "a3": {"text": "Nour_k: what makes him angry? Oh, I have a list. Power cuts. Especially in the middle of a render that took three hours. Internet that blocks half of the websites he needs. And people who say that using AI is cheating. For him it's a tool, like a calculator: you still have to understand what you're doing.", "words": [[0.0, 0.28], [0.28, 1.46], [1.46, 1.72], [1.72, 1.9], [1.9, 2.12], [2.12, 3.04], [3.04, 3.2], [3.2, 3.32], [3.32, 3.52], [3.52, 3.62], [3.62, 4.3], [4.3, 5.52], [5.52, 5.92], [5.92, 6.28], [6.28, 6.36], [6.36, 6.52], [6.52, 6.72], [6.72, 6.78], [7.04, 7.04], [7.04, 7.24], [7.24, 7.44], [7.44, 7.74], [7.74, 8.78], [8.78, 9.02], [9.02, 9.38], [9.38, 9.58], [9.58, 9.98], [9.98, 10.16], [10.16, 10.28], [10.28, 10.6], [10.6, 11.0], [11.0, 11.94], [11.94, 12.16], [12.16, 12.36], [12.36, 12.66], [12.86, 12.86], [12.86, 13.04], [13.04, 13.3], [13.3, 13.56], [13.56, 13.96], [13.96, 14.9], [14.9, 15.02], [15.02, 15.16], [15.16, 15.38], [15.38, 15.46], [15.46, 15.66], [15.66, 15.94], [15.94, 16.06], [16.06, 17.34], [17.34, 17.58], [17.58, 17.76], [17.76, 18.06], [18.06, 18.22], [18.22, 18.56], [18.94, 18.96], [18.96, 19.14], [19.14, 19.8]]}, "a4": {"text": "Samir99 wants to know what he's afraid of. Okay, honest answer. Wasting his potential. Being stuck somewhere nothing works, while people his age build the future somewhere else. And... a little bit of speaking in front of the class. Yeah, I said it.", "words": [[0.0, 0.46], [0.46, 0.72], [0.72, 1.4], [1.4, 1.64], [1.64, 1.84], [1.84, 2.1], [2.1, 2.38], [2.38, 2.6], [2.6, 3.38], [3.38, 4.38], [4.38, 4.7], [4.7, 6.0], [6.0, 6.22], [6.22, 6.64], [6.64, 7.64], [7.98, 7.98], [7.98, 8.28], [8.28, 8.76], [8.76, 9.04], [9.04, 10.28], [10.28, 10.42], [10.42, 10.7], [10.7, 11.0], [11.0, 11.28], [11.28, 11.56], [11.56, 11.78], [11.78, 12.04], [12.04, 12.46], [12.46, 13.38], [13.74, 14.26], [14.26, 14.62], [14.62, 14.8], [14.8, 15.02], [15.02, 15.16], [15.16, 15.38], [15.38, 15.76], [15.76, 15.96], [15.96, 16.16], [16.16, 16.28], [16.28, 17.3], [17.3, 17.94], [17.94, 18.16], [18.16, 18.38], [18.38, 18.74]]}, "a5": {"text": "Yara_codes: what would he change about the world? Two things. First, reliable electricity and internet for everyone, because without them, talent doesn't matter. Second, a school that teaches you to build and to think, not only to memorise. And he'd like the world to judge people by what they do, not by where they come from.", "words": [[0.0, 0.38], [0.38, 0.66], [0.66, 2.08], [2.08, 2.4], [2.4, 2.56], [2.56, 2.7], [2.7, 2.98], [2.98, 3.24], [3.24, 3.44], [3.44, 4.24], [4.24, 4.44], [4.44, 5.36], [5.36, 6.06], [6.06, 6.22], [6.9, 6.9], [6.9, 7.14], [7.14, 7.3], [7.3, 7.68], [7.68, 8.46], [8.46, 8.76], [8.76, 9.0], [9.0, 9.52], [9.52, 9.64], [9.64, 10.22], [10.22, 10.96], [10.96, 11.8], [11.94, 12.0], [12.0, 12.22], [12.22, 12.46], [12.46, 12.72], [12.72, 13.0], [13.0, 13.12], [13.12, 13.32], [13.32, 13.6], [13.6, 13.74], [13.74, 14.24], [14.24, 14.44], [14.44, 14.64], [14.64, 14.86], [14.86, 15.82], [15.82, 16.12], [16.12, 16.32], [16.32, 16.44], [16.66, 16.66], [16.66, 16.88], [16.88, 17.1], [17.1, 17.26], [17.26, 17.6], [17.6, 17.94], [17.94, 18.14], [18.14, 18.3], [18.3, 18.9], [18.9, 19.1], [19.1, 19.3], [19.3, 19.52], [19.52, 19.64], [19.64, 19.86], [19.86, 20.56]]}, "a6": {"text": "Elie.b asks the big one: what is his dream? To work in tech and build his own company. He's sure of one thing: AI will be at the core of it, because that's where the world is going. CEO of an AI company, or of something else? He doesn't know yet, and he likes that the door is still open. What he wants is to build things people actually use. Not demos.", "words": [[0.0, 0.42], [0.42, 0.82], [0.82, 1.74], [1.74, 1.98], [1.98, 2.14], [2.14, 2.74], [2.74, 3.02], [3.02, 3.2], [3.2, 3.34], [3.34, 4.2], [4.2, 4.36], [4.36, 4.6], [4.6, 4.8], [4.8, 5.44], [5.44, 5.64], [5.64, 5.82], [5.82, 6.08], [6.08, 6.28], [6.28, 7.16], [7.38, 7.48], [7.48, 7.68], [7.68, 7.9], [7.9, 8.08], [8.08, 8.84], [8.84, 9.24], [9.24, 9.6], [9.6, 9.76], [9.76, 9.86], [9.86, 9.96], [9.96, 10.18], [10.18, 10.36], [10.36, 10.78], [10.78, 11.02], [11.02, 11.4], [11.4, 11.52], [11.52, 11.64], [11.64, 11.9], [11.9, 12.1], [12.1, 12.86], [13.3, 13.3], [13.3, 13.66], [13.66, 13.76], [13.76, 13.92], [13.92, 15.02], [15.02, 15.28], [15.28, 15.42], [15.42, 15.7], [15.7, 16.58], [16.58, 16.82], [16.82, 17.16], [17.16, 17.34], [17.34, 17.98], [17.98, 18.14], [18.14, 18.26], [18.26, 18.46], [18.46, 18.7], [18.7, 18.82], [18.82, 19.06], [19.28, 19.28], [19.28, 19.42], [19.42, 20.18], [20.18, 20.48], [20.48, 20.64], [20.64, 20.86], [20.86, 21.2], [21.2, 21.38], [21.38, 21.56], [21.56, 21.84], [21.84, 22.22], [22.22, 22.54], [22.54, 23.56], [23.56, 23.86], [23.86, 24.76]]}, "a7": {"text": "Last one, from jad_m: what does the future look like? Okay, let me load 2035. He's twenty-five. Studies done, Polytechnique, then MIT, and a company of his own, with AI at its heart. Where exactly? France, America, Lebanon, maybe Asia. He wants the whole map, not one city. The details are still open. What's certain is that he'll be building something. Scroll down, I already built one possible version of his digital footprint.", "words": [[0.0, 0.4], [0.4, 1.26], [1.26, 1.46], [1.46, 1.76], [1.76, 2.04], [2.04, 2.82], [2.82, 3.16], [3.16, 3.34], [3.34, 3.52], [3.52, 3.72], [3.72, 4.1], [4.1, 4.76], [4.76, 5.72], [5.72, 5.96], [5.96, 6.1], [6.1, 6.34], [6.34, 7.92], [8.58, 8.58], [8.58, 8.78], [8.78, 9.12], [9.12, 10.2], [10.2, 10.34], [10.34, 11.3], [11.3, 11.46], [11.46, 11.54], [11.54, 11.84], [11.84, 12.12], [12.12, 12.26], [12.26, 12.84], [12.84, 13.02], [13.02, 13.22], [13.22, 13.58], [13.58, 13.7], [13.7, 14.48], [14.68, 14.78], [14.78, 15.72], [15.72, 16.58], [16.58, 17.58], [17.58, 18.3], [18.3, 18.52], [18.52, 19.42], [19.42, 19.66], [19.66, 19.88], [19.88, 20.12], [20.12, 20.32], [20.32, 20.98], [20.98, 21.2], [21.2, 21.44], [21.44, 22.34], [22.44, 22.54], [22.54, 22.88], [22.88, 23.18], [23.18, 23.36], [23.36, 24.34], [24.34, 24.72], [24.72, 24.96], [24.96, 25.2], [25.2, 25.34], [25.34, 25.5], [25.5, 25.66], [25.66, 25.94], [25.94, 26.96], [26.96, 27.26], [27.26, 28.0], [28.0, 28.18], [28.18, 28.42], [28.42, 28.74], [28.74, 29.0], [29.46, 29.46], [29.46, 29.84], [29.84, 30.04], [30.04, 30.16], [30.16, 30.46], [30.46, 31.42]]}, "outro": {"text": "That's my human. If you want to see what the internet will know about him in 2035, his digital footprint is on the next screen.", "words": [[0.0, 0.4], [0.4, 0.52], [0.52, 1.48], [1.48, 1.68], [1.68, 1.82], [1.82, 1.98], [1.98, 2.14], [2.14, 2.32], [2.32, 2.52], [2.52, 2.72], [2.72, 3.04], [3.04, 3.38], [3.38, 3.62], [3.62, 3.88], [3.88, 4.12], [4.12, 4.3], [4.3, 5.74], [5.74, 5.88], [5.88, 6.18], [6.18, 6.56], [6.56, 6.96], [6.96, 7.08], [7.08, 7.22], [7.22, 7.44], [7.44, 8.34]]}};
+const REACT = {"a1": [["max.dev", "#5AC8FA", "lol never sleeps"], ["nour_k", "#B48CF2", "beirut gang"]], "a2": [["lina_h", "#F28C6A", "five tabs is generous"], ["jad_m", "#FF8FA3", "true"]], "a3": [["yara_codes", "#FFD166", "the render one hurts"], ["samir99", "#7ED957", "AI is a tool. based"]], "a4": [["elie.b", "#4DD0E1", "relatable"], ["max.dev", "#5AC8FA", "you got this"]], "a5": [["lina_h", "#F28C6A", "school that teaches building. yes"]], "a6": [["nour_k", "#B48CF2", "future CEO"], ["samir99", "#7ED957", "not demos, W"]], "a7": [["yara_codes", "#FFD166", "MIT let's go"], ["elie.b", "#4DD0E1", "scrolling down rn"]]};
+const CLIPS = {intro:"clips/intro.mp4",a1:"clips/a1.mp4",a2:"clips/a2.mp4",a3:"clips/a3.mp4",a4:"clips/a4.mp4",a5:"clips/a5.mp4",a6:"clips/a6.mp4",a7:"clips/a7.mp4",outro:"clips/outro.mp4"};
+const $ = id => document.getElementById(id);
+const feed = $('feed'), tv = $('tv'), cap = $('cap'), voice = $('voice'), golive = $('golive'), player = $('player'), bar = $('bar'), now = $('now'), vc = $('vc'), glow = $('glow');
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let busy = false, live = false, raf = null, viewers = 0, qEls = [];
+
+/* chat */
+function msg(user, color, text, kind, delay){
+  const el = document.createElement(kind === 'q' ? 'button' : 'div'); el.className = 'm ' + kind; if(kind === 'q') el.type = 'button';
+  if(delay) el.style.animationDelay = delay + 'ms';
+  if(user){ const u = document.createElement('span'); u.className = 'u'; u.style.color = color; if(user === 'adam.ai'){ const b = document.createElement('i'); b.className = 'badge'; u.appendChild(b); } u.appendChild(document.createTextNode(user)); el.appendChild(u); }
+  el.appendChild(document.createTextNode(text)); feed.appendChild(el); feed.scrollTop = feed.scrollHeight; return el;
+}
+function sys(text){ return msg(null, null, text, 'sys'); }
+voice.addEventListener('change', () => { tv.muted = !voice.checked; });
+
+/* viewer count drifts like a real stream */
+function setViewers(n){ viewers = n; vc.textContent = n.toLocaleString('en-US') + ' watching'; }
+function rampViewers(to, ms){ const from = viewers, t0 = performance.now(); (function step(){ const f = Math.min(1, (performance.now() - t0) / ms), e = 1 - Math.pow(1 - f, 3); setViewers(Math.round(from + (to - from) * e)); if(f < 1) requestAnimationFrame(step); })(); }
+setInterval(() => { if(live) setViewers(Math.max(900, viewers + Math.round((Math.random() - 0.45) * 9))); }, 2500);
+
+/* ambient glow sampled from the video */
+const gctx = glow.getContext('2d', {willReadFrequently:false});
+function paintGlow(){ if(reduced || tv.paused || tv.readyState < 2) return; try{ gctx.drawImage(tv, 0, 0, glow.width, glow.height); }catch(e){} }
+setInterval(paintGlow, 400);
+
+/* captions driven by the real word timings of the voice track */
+function captionAt(key, t){
+  const W = WORDS[key]; if(!W) return null;
+  const words = W.text.split(' '), asr = W.words; let k = 0;
+  while(k < asr.length && asr[k][0] <= t) k++;
+  const i = Math.min(words.length, Math.round(k * words.length / asr.length));
+  if(i === 0) return {before:'', cur:'', after:''};
+  const lo = Math.max(0, i - 7);
+  return {before: words.slice(lo, i - 1).join(' '), cur: words[i - 1], done: i >= words.length};
+}
+function play(key, text, el){
+  if(busy) return; busy = true; player.classList.add('started');
+  document.querySelectorAll('.m.q.active,.m.q.next').forEach(x => x.classList.remove('active', 'next')); if(el) el.classList.add('active');
+  const who = el ? el.querySelector('.u')?.textContent : null;
+  now.innerHTML = who && who !== 'adam.ai' ? 'Answering <b>' + who + '</b>' : ''; now.classList.toggle('on', !!(who && who !== 'adam.ai'));
+  tv.src = CLIPS[key]; tv.muted = !voice.checked; tv.currentTime = 0; cap.hidden = false; cap.textContent = '';
+  const reacts = (REACT[key] || []).slice(); const rt = reacts.map((_, i) => 0.45 + 0.35 * i / Math.max(1, reacts.length));
+  cancelAnimationFrame(raf);
+  const tick = () => {
+    const d = tv.duration || 1, f = Math.min(1, tv.currentTime / d); bar.style.width = (f * 100) + '%';
+    const c = captionAt(key, tv.currentTime);
+    if(c){ cap.innerHTML = ''; if(c.before){ cap.appendChild(document.createTextNode(c.before + ' ')); } const em = document.createElement('em'); em.textContent = c.cur; cap.appendChild(em); }
+    while(reacts.length && f >= rt[0]){ const r = reacts.shift(); rt.shift(); msg(r[0], r[1], r[2], 'r'); }
+    if(!tv.ended) raf = requestAnimationFrame(tick);
+  };
+  tv.onplaying = () => { raf = requestAnimationFrame(tick); };
+  tv.onended = () => { busy = false; cancelAnimationFrame(raf); bar.style.width = '100%'; now.classList.remove('on');
+    if(el){ el.classList.remove('active'); el.classList.add('done'); }
+    setTimeout(() => { cap.hidden = true; bar.style.width = '0'; }, 1200);
+    const nxt = qEls.find(q => !q.classList.contains('done')); if(nxt) nxt.classList.add('next'); };
+  tv.onerror = () => { busy = false; cap.textContent = text; };
+  tv.play().catch(() => { busy = false; cap.textContent = text; });
+}
+
+/* going live: one orchestrated moment, triggered by the person */
+const goLive = () => {
+  if(live) return; live = true; golive.textContent = 'Live'; golive.classList.add('done');
+  document.body.classList.add('is-live'); $('livebadge').textContent = 'LIVE';
+  sys('Stream started'); rampViewers(1204, 2400);
+  const greets = [['lina_h','#F28C6A','yooo first'],['max.dev','#5AC8FA','it works??'],['nour_k','#B48CF2','hi adam.ai']];
+  greets.forEach((g, i) => setTimeout(() => msg(g[0], g[1], g[2], 'r'), 400 + i * 350));
+  setTimeout(() => play('intro', WORDS.intro.text, null), 1500);
+};
+golive.addEventListener('click', goLive); $('cta').addEventListener('click', goLive);
+/* questions */
+qEls = S.qa.map((x, i) => { const el = msg(x.user, x.color, x.q, 'q', 120 * i); el.addEventListener('click', () => play('a' + (i + 1), WORDS['a' + (i + 1)].text, el)); el.addEventListener('pointerenter', () => { const v = document.createElement('link'); v.rel = 'prefetch'; v.href = CLIPS['a' + (i + 1)]; document.head.appendChild(v); }, {once:true}); return el; });
+const bye = msg('adam.ai', '#35E0E8', 'end the stream', 'q', 120 * S.qa.length); bye.addEventListener('click', () => play('outro', WORDS.outro.text, bye));
+/* the viewer can chat; the twin only answers pinned questions tonight */
+$('say').addEventListener('submit', e => { e.preventDefault(); const v = $('sayin').value.trim(); if(!v) return; $('sayin').value = ''; msg('you', '#FFFFFF', v, 'r');
+  setTimeout(() => msg('adam.ai', '#35E0E8', live ? 'I only take the pinned questions tonight — click one 🙂' : 'Start the stream first, then click a question.', 'r'), 900); });
+/* keyboard: space toggles pause */
+document.addEventListener('keydown', e => { if(e.code === 'Space' && document.activeElement.tagName !== 'INPUT' && player.classList.contains('started')){ e.preventDefault(); tv.paused ? tv.play() : tv.pause(); } });
+
+/* ───── 2035 desktop: draggable windows, dock ───── */
+let z = 10;
+function lift(w){ document.querySelectorAll('.lift').forEach(x => x.classList.remove('lift')); w.classList.add('lift'); w.style.zIndex = ++z; }
+document.querySelectorAll('[data-drag]').forEach(h => {
+  const w = h.closest('.win,.phone'); w.addEventListener('pointerdown', () => lift(w));
+  h.addEventListener('pointerdown', e => {
+    if(innerWidth < 900 || e.button !== 0) return; e.preventDefault(); h.setPointerCapture(e.pointerId);
+    const m = new DOMMatrixReadOnly(getComputedStyle(w).transform); const sx = e.clientX - m.m41, sy = e.clientY - m.m42; w.style.transition = 'none';
+    const mv = ev => { w.style.transform = `translate(${ev.clientX - sx}px,${ev.clientY - sy}px)`; };
+    const up = () => { h.removeEventListener('pointermove', mv); h.removeEventListener('pointerup', up); w.style.transition = ''; };
+    h.addEventListener('pointermove', mv); h.addEventListener('pointerup', up);
+  });
+});
+const dock = $('dock');
+new IntersectionObserver(es => es.forEach(x => dock.classList.toggle('on', x.isIntersecting)), {rootMargin:'-20% 0px -10% 0px'}).observe($('desk'));
+dock.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { const w = $(b.dataset.go); w.scrollIntoView({behavior: reduced ? 'auto' : 'smooth', block:'center'}); lift(w.querySelector('.win,.phone') || w); }));
+/* instagram like */
+const heart = $('heart'); let liked = false;
+const like = () => { liked = !liked; heart.classList.toggle('on', liked); heart.textContent = liked ? '♥' : '♡'; $('likes').textContent = liked ? '2,036' : '2,035'; };
+heart.addEventListener('click', like); heart.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); like(); } });
+$('igimg').addEventListener('dblclick', () => { if(!liked) like(); });
+</script>
+</body>
+</html>
