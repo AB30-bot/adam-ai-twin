@@ -658,10 +658,10 @@ const dock = $('dock');
 new IntersectionObserver(es => es.forEach(x => dock.classList.toggle('on', x.isIntersecting)), {rootMargin:'-20% 0px -10% 0px'}).observe($('desk'));
 dock.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { const w = $(b.dataset.go); w.scrollIntoView({behavior: reduced ? 'auto' : 'smooth', block:'center'}); lift(w.querySelector('.win,.phone') || w); }));
 /* instagram like */
-const heart = $('heart'); let liked = false;
-const like = () => { liked = !liked; heart.classList.toggle('on', liked); heart.textContent = liked ? '♥' : '♡'; $('likes').textContent = liked ? '2,036' : '2,035'; };
+const heart = $('heart'); let igLiked = false;
+const like = () => { igLiked = !igLiked; heart.classList.toggle('on', igLiked); heart.textContent = igLiked ? '♥' : '♡'; $('likes').textContent = igLiked ? '2,036' : '2,035'; };
 heart.addEventListener('click', like); heart.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); like(); } });
-$('igimg').addEventListener('dblclick', () => { if(!liked) like(); });
+$('igimg').addEventListener('dblclick', () => { if(!igLiked) like(); });
 </script>
 </body>
 </html>
