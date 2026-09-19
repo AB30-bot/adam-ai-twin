@@ -344,7 +344,7 @@ img,video{max-width:100%}
         </div>
         <h2 class="yt-title">ADAM.AI answers the chat — ask my human anything 🔴 LIVE</h2>
         <div class="yt-row">
-          <button class="yt-ch" id="tochannel" type="button"><img src="img/st2_face.jpg" alt=""><span><b>ADAM.AI</b><small id="subs">12.4K subscribers</small></span></button>
+          <button class="yt-ch" id="tochannel" type="button"><img src="img/st2_face.jpg" alt=""><span><b>ADAM.AI</b><small id="subs">148K subscribers</small></span></button>
           <button class="yt-sub" id="sub" type="button">Subscribe</button>
           <div class="yt-acts">
             <div class="seg"><button id="like" type="button">👍 <span id="likes">1.2K</span></button><button id="dislike" type="button">👎</button></div>
@@ -374,8 +374,8 @@ Avatar and voice are generated — no face or voice cloning was used. Made for E
         <img src="img/st2_face.jpg" alt="">
         <div>
           <h2>ADAM.AI</h2>
-          <div class="ch-meta"><b>@adam.ai</b> · <span id="subs2">12.4K subscribers</span> · 9 videos</div>
-          <div class="ch-desc">The digital twin of Adam Barbir, 16. Builds AI tools, automations and websites. New video whenever the electricity allows.</div>
+          <div class="ch-meta"><b>@adam.ai</b> · <span id="subs2">148K subscribers</span> · 212 videos</div>
+          <div class="ch-desc">Adam Barbir, founder of Loop Labs — AI agents that keep working when the lights go out. Building an AI company on camera, from a bedroom in Beirut to San Francisco. Hosted by ADAM.AI, his digital twin.</div>
           <div class="ch-btns"><button class="yt-sub" id="sub2" type="button">Subscribe</button><button class="pill back" id="back" type="button">← Back to the live</button></div>
         </div>
       </div>
@@ -532,14 +532,14 @@ const REACT = {"a1": [["max.dev", "#5AC8FA", "lol never sleeps"], ["nour_k", "#B
 const CLIPS = {intro:"clips/intro.mp4",a1:"clips/a1.mp4",a2:"clips/a2.mp4",a3:"clips/a3.mp4",a4:"clips/a4.mp4",a5:"clips/a5.mp4",a6:"clips/a6.mp4",a7:"clips/a7.mp4",outro:"clips/outro.mp4"};
 const VIDEOS = [
   {t:"ADAM.AI answers the chat — ask my human anything", th:"live", tt:"LIVE Q&A", live:true, m:"1,204 watching · Live now"},
-  {t:"I built an AI that makes phone calls for me", th:"calls", tt:"IT CALLS<br>PEOPLE", y:1, d:"14:07", m:"48K views · 3 weeks ago"},
-  {t:"Power cut in the middle of a 3-hour render. Again.", th:"powercut", tt:"NOT AGAIN", d:"6:14", m:"67K views · 3 months ago", p:70},
-  {t:"Photo your clothes, the AI picks your outfit (free app)", th:"stylist", tt:"AI STYLIST", y:1, d:"9:32", m:"21K views · 1 month ago"},
-  {t:"Which AI face should be my twin? I tested 3", th:"faces", tt:"3 FACES<br>1 WINNER", d:"11:48", m:"12K views · 2 weeks ago"},
-  {t:"Building a website in one night, no sleep", th:"website", tt:"ONE NIGHT", y:1, d:"18:20", m:"33K views · 2 months ago", p:35},
-  {t:"One photo → 3D model, on my own PC", th:"setup", tt:"PHOTO → 3D", d:"7:55", m:"9.8K views · 1 month ago"},
-  {t:"Practicing public speaking with AI personas", th:"speaking", tt:"I'M SCARED<br>OF THIS", y:1, d:"12:03", m:"5.1K views · 2 months ago"},
-  {t:"I spoke at a tech meetup (nervous)", th:"meetup", tt:"ON STAGE", d:"4:41", m:"3.4K views · 5 days ago"},
+  {t:"How our agents kept 40,000 businesses running through the 2034 blackout", th:"meetup", tt:"11 DAYS<br>NO POWER", y:1, d:"16:42", m:"1.4M views · 6 months ago"},
+  {t:"Why I left Mistral to start Loop Labs", th:"setup", tt:"I QUIT", d:"12:09", m:"612K views · 2 years ago", p:60},
+  {t:"A week between San Francisco and Paris (founder vlog)", th:"stylist", tt:"SF → PARIS", y:1, d:"21:37", m:"98K views · 3 weeks ago"},
+  {t:"My MIT thesis in 8 minutes: agents that don't die", th:"speaking", tt:"AGENTS<br>THAT DON'T DIE", d:"8:04", m:"380K views · 3 years ago"},
+  {t:"Loop Labs office tour — Paris 13e", th:"website", tt:"PARIS OFFICE", y:1, d:"9:51", m:"225K views · 1 year ago"},
+  {t:"I built an AI that makes phone calls for me (2026)", th:"calls", tt:"IT CALLS<br>PEOPLE", d:"14:07", m:"48K views · 9 years ago"},
+  {t:"Power cut in the middle of a 3-hour render. Again. (2026)", th:"powercut", tt:"NOT AGAIN", y:1, d:"6:14", m:"67K views · 9 years ago", p:35},
+  {t:"Which AI face should be my twin? I tested 3 (2026)", th:"faces", tt:"3 FACES<br>1 WINNER", d:"11:48", m:"12K views · 9 years ago"},
 ];
 const $ = id => document.getElementById(id);
 const feed = $('feed'), tv = $('tv'), cap = $('cap'), golive = $('golive'), player = $('player'), bar = $('bar'), now = $('now'), vc = $('vc'), glow = $('glow'), toast = $('toast');
@@ -628,7 +628,7 @@ document.addEventListener('keydown', e => { if(e.code === 'Space' && !/INPUT|BUT
 let liked = false, subbed = false;
 $('like').addEventListener('click', () => { liked = !liked; $('like').classList.toggle('on', liked); $('likes').textContent = liked ? '1.3K' : '1.2K'; $('dislike').classList.remove('on'); });
 $('dislike').addEventListener('click', () => { $('dislike').classList.toggle('on'); if(liked){ liked = false; $('like').classList.remove('on'); $('likes').textContent = '1.2K'; } });
-const setSub = () => { subbed = !subbed; document.querySelectorAll('.yt-sub').forEach(b => { b.classList.toggle('on', subbed); b.textContent = subbed ? 'Subscribed' : 'Subscribe'; }); const n = subbed ? '12.5K subscribers' : '12.4K subscribers'; $('subs').textContent = n; $('subs2').textContent = n; say(subbed ? 'Subscription added' : 'Subscription removed'); };
+const setSub = () => { subbed = !subbed; document.querySelectorAll('.yt-sub').forEach(b => { b.classList.toggle('on', subbed); b.textContent = subbed ? 'Subscribed' : 'Subscribe'; }); const n = subbed ? '149K subscribers' : '148K subscribers'; $('subs').textContent = n; $('subs2').textContent = n; say(subbed ? 'Subscription added' : 'Subscription removed'); };
 $('sub').addEventListener('click', setSub); $('sub2').addEventListener('click', setSub);
 $('share').addEventListener('click', async () => { try{ await navigator.clipboard.writeText(location.href.split('#')[0]); say('Link copied'); }catch(e){ say(location.href); } });
 $('desc').addEventListener('click', () => { const d = $('desc'); d.classList.toggle('open'); d.querySelector('.more').textContent = d.classList.contains('open') ? 'Show less' : '…more'; });
